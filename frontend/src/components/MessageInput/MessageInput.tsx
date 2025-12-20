@@ -4,8 +4,9 @@ import styles from "./MessageInput.module.css";
 interface MessageInputProps {
   onSend: (message: string) => void;
   onClear?: () => void;
-  onStop?: () => void;
-  stopLabel?: string;
+  onPause?: () => void;
+  isPaused?: boolean;
+  onContinue?: () => void;
   disabled?: boolean;
   language: "ru" | "en";
 }
@@ -42,8 +43,9 @@ declare global {
 const MessageInput: React.FC<MessageInputProps> = ({
   onSend,
   onClear,
-  onStop,
-  stopLabel,
+  onPause,
+  isPaused,
+  onContinue,
   disabled,
   language,
 }) => {
@@ -52,6 +54,10 @@ const MessageInput: React.FC<MessageInputProps> = ({
   const recognitionRef = useRef<SpeechRecognitionType | null>(null);
 
   const handleSend = () => {
+    if (isPaused && onContinue) {
+      onContinue();
+      return;
+    }
     if (input.trim() && !disabled) {
       onSend(input);
       setInput("");
@@ -211,29 +217,33 @@ const MessageInput: React.FC<MessageInputProps> = ({
           />
         </svg>
       </button>
-      {onStop ? (
+      {onPause ? (
         <button
-          onClick={onStop}
+          onClick={() => {
+            window.speechSynthesis.cancel();
+            onPause();
+          }}
           disabled={false}
-          className={styles.stopButton}
-          title={stopLabel}
+          className={styles.pauseButton}
+          title={language === "ru" ? "Остановить" : "Stop"}
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <rect
-              x="6"
-              y="6"
-              width="12"
-              height="12"
-              rx="2"
-              fill="currentColor"
-            />
+            <rect x="6" y="4" width="4" height="16" fill="currentColor" />
+            <rect x="14" y="4" width="4" height="16" fill="currentColor" />
           </svg>
         </button>
       ) : (
         <button
           onClick={handleSend}
-          disabled={disabled || !input.trim()}
+          disabled={disabled || (!input.trim() && !isPaused)}
           className={styles.sendButton}
+          title={
+            isPaused && language === "ru"
+              ? "Продолжить"
+              : isPaused
+              ? "Continue"
+              : undefined
+          }
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path

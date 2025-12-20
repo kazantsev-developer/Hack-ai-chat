@@ -136,7 +136,8 @@
 }
 
 .sendButton,
-.stopButton {
+.stopButton,
+.pauseButton {
   padding: 0.85rem;
   border: none;
   border-radius: 50%;
@@ -169,7 +170,9 @@
 :global(.light) .sendButton,
 :global(body.light) .sendButton,
 :global(.light) .stopButton,
-:global(body.light) .stopButton {
+:global(body.light) .stopButton,
+:global(.light) .pauseButton,
+:global(body.light) .pauseButton {
   background: #5f7367 !important;
   color: #ffffff !important;
 }
@@ -177,7 +180,9 @@
 :global(.dark) .sendButton,
 :global(body.dark) .sendButton,
 :global(.dark) .stopButton,
-:global(body.dark) .stopButton {
+:global(body.dark) .stopButton,
+:global(.dark) .pauseButton,
+:global(body.dark) .pauseButton {
   background: #666 !important;
   color: #ffffff !important;
 }
@@ -198,27 +203,31 @@
 
 .micButton:hover:not(:disabled),
 .sendButton:hover:not(:disabled),
-.stopButton:hover:not(:disabled) {
+.stopButton:hover:not(:disabled),
+.pauseButton:hover:not(:disabled) {
   transform: scale(1.05);
   opacity: 0.9;
 }
 
 .micButton:active:not(:disabled),
 .sendButton:active:not(:disabled),
-.stopButton:active:not(:disabled) {
+.stopButton:active:not(:disabled),
+.pauseButton:active:not(:disabled) {
   transform: scale(0.95);
 }
 
 .micButton:disabled,
 .sendButton:disabled,
-.stopButton:disabled {
+.stopButton:disabled,
+.pauseButton:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
 .micButton svg,
 .sendButton svg,
-.stopButton svg {
+.stopButton svg,
+.pauseButton svg {
   width: 20px;
   height: 20px;
 }
