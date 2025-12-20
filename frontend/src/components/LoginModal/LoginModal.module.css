@@ -1,0 +1,226 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+}
+
+.modalContent {
+  background: #ffffff;
+  border-radius: 30px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+:global(body.dark) .modalContent {
+  background: #2a2a2a;
+}
+
+.modalClose {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #666;
+  line-height: 1;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+:global(body.dark) .modalClose {
+  color: #999;
+}
+
+.modalClose:hover {
+  color: #333;
+}
+
+:global(body.dark) .modalClose:hover {
+  color: #fff;
+}
+
+.modalTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+:global(body.dark) .modalTitle {
+  color: #e0e0e0;
+}
+
+.loginMethods {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+:global(body.dark) .loginMethods {
+  border-bottom-color: #444;
+}
+
+.methodTab {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: transparent;
+  color: #666;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+}
+
+:global(body.dark) .methodTab {
+  color: #999;
+}
+
+.methodTab.active {
+  color: #5f7367;
+  border-bottom-color: #5f7367;
+  font-weight: 600;
+}
+
+:global(body.dark) .methodTab.active {
+  color: #5f7367;
+}
+
+.methodTab:hover {
+  color: #5f7367;
+}
+
+:global(body.dark) .methodTab:hover {
+  color: #5f7367;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+:global(body.dark) .formGroup label {
+  color: #e0e0e0;
+}
+
+.formGroup input {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 15px;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+  background: #ffffff;
+  color: #333;
+}
+
+:global(body.dark) .formGroup input {
+  background: #333333;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+.formGroup input:focus {
+  outline: none;
+  border-color: #5f7367;
+}
+
+.formActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.btnPrimary,
+.btnSecondary {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 15px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btnPrimary {
+  background: #5f7367;
+  color: #ffffff;
+}
+
+.btnPrimary:hover {
+  background: #4a5a52;
+  transform: scale(1.02);
+}
+
+.btnSecondary {
+  background: #e0e0e0;
+  color: #333;
+}
+
+:global(body.dark) .btnSecondary {
+  background: #444;
+  color: #e0e0e0;
+}
+
+.btnSecondary:hover {
+  background: #d0d0d0;
+}
+
+:global(body.dark) .btnSecondary:hover {
+  background: #555;
+}
+
+.formError {
+  color: #d32f2f;
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+:global(body.dark) .formError {
+  color: #ff6b6b;
+}
+
+.formMessage {
+  color: #5f7367;
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+:global(body.dark) .formMessage {
+  color: #5f7367;
+}

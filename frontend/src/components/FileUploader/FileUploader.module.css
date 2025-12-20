@@ -1,0 +1,101 @@
+.fileUploader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.fileUploadLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.fileInput {
+  display: none;
+}
+
+.fileUploadButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: 15px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+  text-align: center;
+}
+
+:global(body.light) .fileUploadButton {
+  background-color: rgba(95, 115, 103, 0.08);
+  color: #5f7367;
+  border-color: rgba(95, 115, 103, 0.3);
+}
+
+:global(body.dark) .fileUploadButton {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #e0e0e0;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.fileUploadButton:hover:not(:disabled) {
+  background-color: rgba(95, 115, 103, 0.15);
+  border-color: rgba(95, 115, 103, 0.4);
+}
+
+:global(body.dark) .fileUploadButton:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.fileUploadButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fileUploadHint {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  text-align: center;
+}
+
+:global(body.light) .fileUploadHint {
+  color: #5f7367;
+}
+
+:global(body.dark) .fileUploadHint {
+  color: #e0e0e0;
+}
+
+.fileUploadMessage {
+  font-size: 0.85rem;
+  color: #5f7367;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 10px;
+  background-color: rgba(95, 115, 103, 0.1);
+}
+
+:global(body.dark) .fileUploadMessage {
+  color: #a0d4a0;
+  background-color: rgba(160, 212, 160, 0.1);
+}
+
+.fileUploadError {
+  font-size: 0.85rem;
+  color: #d32f2f;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 10px;
+  background-color: rgba(211, 47, 47, 0.1);
+}
+
+:global(body.dark) .fileUploadError {
+  color: #ff6b6b;
+  background-color: rgba(255, 107, 107, 0.1);
+}

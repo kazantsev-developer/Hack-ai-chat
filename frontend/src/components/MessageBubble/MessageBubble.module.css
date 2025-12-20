@@ -1,0 +1,211 @@
+.messageBubble {
+  display: flex;
+  width: 100%;
+  animation: fadeIn 0.3s ease;
+}
+
+.messageBubble.user,
+.user {
+  justify-content: flex-end;
+}
+
+.messageBubble.assistant,
+.assistant {
+  justify-content: flex-start;
+}
+
+.messageBubble.streaming,
+.streaming {
+  position: relative;
+}
+
+.messageContent {
+  max-width: 70%;
+  padding: 1rem 1.2rem;
+  border-radius: 30px;
+  word-wrap: break-word;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.messageBubble.user .messageContent,
+.user .messageContent {
+  border-top-right-radius: 4px;
+}
+
+.messageBubble.assistant .messageContent,
+.assistant .messageContent {
+  border-top-left-radius: 4px;
+}
+
+:global(.light) .messageBubble.user .messageContent,
+:global(body.light) .messageBubble.user .messageContent,
+:global(.light) .user .messageContent,
+:global(body.light) .user .messageContent {
+  background: #e8e8dc;
+  color: #333;
+}
+
+:global(.dark) .messageBubble.user .messageContent,
+:global(body.dark) .messageBubble.user .messageContent,
+:global(.dark) .user .messageContent,
+:global(body.dark) .user .messageContent {
+  background: #2a2a2a;
+  color: #e0e0e0;
+}
+
+:global(.light) .messageBubble.assistant .messageContent,
+:global(body.light) .messageBubble.assistant .messageContent,
+:global(.light) .assistant .messageContent,
+:global(body.light) .assistant .messageContent {
+  background: #e8e8dc;
+  color: #333;
+}
+
+:global(.dark) .messageBubble.assistant .messageContent,
+:global(body.dark) .messageBubble.assistant .messageContent,
+:global(.dark) .assistant .messageContent,
+:global(body.dark) .assistant .messageContent {
+  background: #2a2a2a;
+  color: #e0e0e0;
+}
+
+.messageText {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  flex: 1;
+}
+
+.cursor {
+  display: inline-block;
+}
+
+.ttsControls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+.ttsButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.3rem;
+  opacity: 0.6;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.speedButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  opacity: 0.6;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  min-width: 35px;
+}
+
+:global(.light) .ttsButton,
+:global(body.light) .ttsButton,
+:global(.light) .speedButton,
+:global(body.light) .speedButton {
+  color: #5f7367;
+}
+
+:global(.dark) .ttsButton,
+:global(body.dark) .ttsButton,
+:global(.dark) .speedButton,
+:global(body.dark) .speedButton {
+  color: #999;
+}
+
+.ttsButton:hover,
+.speedButton:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+:global(.light) .ttsButton:hover,
+:global(body.light) .ttsButton:hover,
+:global(.light) .speedButton:hover,
+:global(body.light) .speedButton:hover {
+  background: rgba(95, 115, 103, 0.1);
+}
+
+:global(.dark) .ttsButton:hover,
+:global(body.dark) .ttsButton:hover,
+:global(.dark) .speedButton:hover,
+:global(body.dark) .speedButton:hover {
+  background: rgba(153, 153, 153, 0.1);
+}
+
+.messageBubble.streaming .messageContent,
+.streaming .messageContent {
+  position: relative;
+}
+
+.messageBubble.streaming .messageContent::after,
+.streaming .messageContent::after {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink 1s infinite;
+  transition: background-color 0.3s ease;
+}
+
+:global(.light) .messageBubble.streaming .messageContent::after,
+:global(body.light) .messageBubble.streaming .messageContent::after,
+:global(.light) .streaming .messageContent::after,
+:global(body.light) .streaming .messageContent::after {
+  background: #5f7367;
+}
+
+:global(.dark) .messageBubble.streaming .messageContent::after,
+:global(body.dark) .messageBubble.streaming .messageContent::after,
+:global(.dark) .streaming .messageContent::after,
+:global(body.dark) .streaming .messageContent::after {
+  background: #999;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,224 @@
+.messageInput {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  align-items: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  border-radius: 40px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border: 2px solid;
+  width: 100%;
+  max-width: 800px;
+}
+
+:global(.light) .messageInput,
+:global(body.light) .messageInput {
+  background: #d8d8cc;
+  border-color: #5f7367;
+}
+
+:global(.dark) .messageInput,
+:global(body.dark) .messageInput {
+  background: #333333;
+  border-color: #666;
+}
+
+.messageInput textarea {
+  flex: 1 1 auto;
+  padding: 1rem 1.5rem;
+  border: none;
+  background: transparent;
+  border-radius: 40px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: none;
+  min-height: 50px;
+  max-height: 150px;
+  max-width: calc(100% - 120px);
+  transition: all 0.2s ease;
+  line-height: 1.5;
+  order: 1;
+}
+
+:global(.light) .messageInput textarea,
+:global(body.light) .messageInput textarea {
+  color: #333;
+}
+
+:global(.dark) .messageInput textarea,
+:global(body.dark) .messageInput textarea {
+  color: #e0e0e0;
+}
+
+.messageInput textarea::placeholder {
+  transition: color 0.3s ease;
+}
+
+:global(.light) .messageInput textarea::placeholder,
+:global(body.light) .messageInput textarea::placeholder {
+  color: #999;
+}
+
+:global(.dark) .messageInput textarea::placeholder,
+:global(body.dark) .messageInput textarea::placeholder {
+  color: #777;
+}
+
+.messageInput textarea:focus {
+  outline: none;
+}
+
+.clearButton {
+  padding: 0.85rem;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  min-width: 50px;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+  order: 1;
+}
+
+:global(.light) .clearButton,
+:global(body.light) .clearButton {
+  background: #5f7367 !important;
+  color: #ffffff !important;
+}
+
+:global(.dark) .clearButton,
+:global(body.dark) .clearButton {
+  background: #666 !important;
+  color: #ffffff !important;
+}
+
+.clearButton:hover:not(:disabled) {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.clearButton:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.clearButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.clearButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+.micButton {
+  padding: 0.85rem;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  min-width: 50px;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+  order: 2;
+}
+
+.sendButton,
+.stopButton {
+  padding: 0.85rem;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  min-width: 50px;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+  order: 3;
+}
+
+:global(.light) .micButton,
+:global(body.light) .micButton {
+  background: #5f7367 !important;
+  color: #ffffff !important;
+}
+
+:global(.dark) .micButton,
+:global(body.dark) .micButton {
+  background: #666 !important;
+  color: #ffffff !important;
+}
+
+:global(.light) .sendButton,
+:global(body.light) .sendButton,
+:global(.light) .stopButton,
+:global(body.light) .stopButton {
+  background: #5f7367 !important;
+  color: #ffffff !important;
+}
+
+:global(.dark) .sendButton,
+:global(body.dark) .sendButton,
+:global(.dark) .stopButton,
+:global(body.dark) .stopButton {
+  background: #666 !important;
+  color: #ffffff !important;
+}
+
+.micButton.recording {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.micButton:hover:not(:disabled),
+.sendButton:hover:not(:disabled),
+.stopButton:hover:not(:disabled) {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.micButton:active:not(:disabled),
+.sendButton:active:not(:disabled),
+.stopButton:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.micButton:disabled,
+.sendButton:disabled,
+.stopButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.micButton svg,
+.sendButton svg,
+.stopButton svg {
+  width: 20px;
+  height: 20px;
+}
