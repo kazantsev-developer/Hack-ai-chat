@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import type { Agent } from "../../types";
+import { API_URL } from "../../config";
 import styles from "./AgentSelector.module.css";
 
 interface AgentSelectorProps {
@@ -21,7 +22,7 @@ const AgentSelector: React.FC<AgentSelectorProps> = ({
 
   useEffect(() => {
     axios
-      .get("http://localhost:5001/api/agents")
+      .get(`${API_URL}/api/agents`)
       .then((res) => {
         setAgents(res.data);
         setLoading(false);
@@ -79,7 +80,11 @@ const AgentSelector: React.FC<AgentSelectorProps> = ({
     : t.loading;
 
   if (loading) {
-    return <div className={`${styles.customSelect} ${styles.disabled}`}>{t.loading}</div>;
+    return (
+      <div className={`${styles.customSelect} ${styles.disabled}`}>
+        {t.loading}
+      </div>
+    );
   }
 
   return (
@@ -122,4 +127,3 @@ const AgentSelector: React.FC<AgentSelectorProps> = ({
 };
 
 export default AgentSelector;
-

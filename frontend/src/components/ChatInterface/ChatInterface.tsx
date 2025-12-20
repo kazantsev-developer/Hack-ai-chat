@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { io, type Socket } from "socket.io-client";
 import type { Message } from "../../types";
+import { API_URL, SOCKET_URL } from "../../config";
 import MessageList from "../MessageList/MessageList";
 import MessageInput from "../MessageInput/MessageInput";
 import styles from "./ChatInterface.module.css";
@@ -36,7 +37,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
       onSessionIdChange(sessionId);
       const savedDoc = localStorage.getItem(`document_${sessionId}`);
       if (savedDoc) {
-        fetch(`http://localhost:5001/api/chat/session/${sessionId}/document`, {
+        fetch(`${API_URL}/api/chat/session/${sessionId}/document`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ documentId: savedDoc }),
@@ -47,9 +48,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
   const [socket, setSocket] = useState<Socket | null>(null);
   const [currentResponse, setCurrentResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:5001");
+    const newSocket = io(SOCKET_URL);
 
     newSocket.on("connect", () => {
       console.log("Connected to server");
@@ -69,10 +71,21 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 timestamp: new Date(),
               },
             ]);
+          } else if (currentResponse.trim()) {
+            // Сохраняем текущий ответ если он есть
+            setMessages((prev) => [
+              ...prev,
+              {
+                role: "assistant",
+                content: currentResponse,
+                timestamp: new Date(),
+              },
+            ]);
           }
           setCurrentResponse("");
           setIsLoading(false);
-        } else {
+          setIsPaused(false);
+        } else if (!isPaused) {
           setCurrentResponse((prev) => prev + data.chunk);
         }
       }
@@ -90,6 +103,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
       ]);
       setCurrentResponse("");
       setIsLoading(false);
+      setIsPaused(false);
     });
 
     return () => {
@@ -120,15 +134,34 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     });
   };
 
-  const handleStop = () => {
-    console.log("[Frontend] Stop button clicked");
+  const handlePause = () => {
+    console.log("[Frontend] Pause button clicked");
     window.speechSynthesis.cancel();
-    setCurrentResponse("");
+    setIsPaused(true);
     setIsLoading(false);
     if (socket) {
       socket.emit("chat:stop", { sessionId });
-      console.log("[Frontend] Stop signal sent to server");
+      console.log("[Frontend] Pause signal sent to server");
     }
+    // Сохраняем текущий ответ в сообщения
+    if (currentResponse.trim()) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: currentResponse,
+          timestamp: new Date(),
+        },
+      ]);
+      setCurrentResponse("");
+    }
+  };
+
+  const handleDeleteCurrent = () => {
+    setCurrentResponse("");
+    setIsLoading(false);
+    setIsPaused(false);
+    window.speechSynthesis.cancel();
   };
 
   const handleClear = () => {

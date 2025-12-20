@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { API_URL } from "../../config";
 import styles from "./FileUploader.module.css";
 
 interface FileUploaderProps {
@@ -69,7 +70,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ language, sessionId }) => {
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://localhost:5001/api/rag/upload", {
+      const response = await fetch(`${API_URL}/api/rag/upload`, {
         method: "POST",
         body: formData,
       });
@@ -80,7 +81,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ language, sessionId }) => {
         const documentId = data.documentId;
         if (documentId && sessionId) {
           const docResponse = await fetch(
-            `http://localhost:5001/api/chat/session/${sessionId}/document`,
+            `${API_URL}/api/chat/session/${sessionId}/document`,
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },

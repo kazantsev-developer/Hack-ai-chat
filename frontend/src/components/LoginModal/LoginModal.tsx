@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_URL } from "../../config";
 import styles from "./LoginModal.module.css";
 
 interface LoginModalProps {
@@ -95,28 +96,22 @@ const LoginModal: React.FC<LoginModalProps> = ({
           setLoading(false);
           return;
         }
-        response = await fetch(
-          "http://localhost:5001/api/auth/request-sms-code",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ phone, language }),
-          }
-        );
+        response = await fetch(`${API_URL}/api/auth/request-sms-code`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ phone, language }),
+        });
       } else if (loginMethod === "email") {
         if (!email.trim()) {
           setError(t.enterEmail);
           setLoading(false);
           return;
         }
-        response = await fetch(
-          "http://localhost:5001/api/auth/request-email-code",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, language }),
-          }
-        );
+        response = await fetch(`${API_URL}/api/auth/request-email-code`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, language }),
+        });
       } else {
         setLoading(false);
         return;
@@ -159,31 +154,25 @@ const LoginModal: React.FC<LoginModalProps> = ({
     try {
       let response;
       if (loginMethod === "sms") {
-        response = await fetch(
-          "http://localhost:5001/api/auth/verify-sms-code",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              phone,
-              code,
-              telegramUsername: telegramUsername || undefined,
-            }),
-          }
-        );
+        response = await fetch(`${API_URL}/api/auth/verify-sms-code`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            phone,
+            code,
+            telegramUsername: telegramUsername || undefined,
+          }),
+        });
       } else if (loginMethod === "email") {
-        response = await fetch(
-          "http://localhost:5001/api/auth/verify-email-code",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email,
-              code,
-              telegramUsername: telegramUsername || undefined,
-            }),
-          }
-        );
+        response = await fetch(`${API_URL}/api/auth/verify-email-code`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email,
+            code,
+            telegramUsername: telegramUsername || undefined,
+          }),
+        });
       } else {
         setLoading(false);
         return;
@@ -221,14 +210,11 @@ const LoginModal: React.FC<LoginModalProps> = ({
     setMessage("");
 
     try {
-      const response = await fetch(
-        "http://localhost:5001/api/auth/login-telegram",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ telegramUsername }),
-        }
-      );
+      const response = await fetch(`${API_URL}/api/auth/login-telegram`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ telegramUsername }),
+      });
 
       if (!response.ok) {
         const errorData = await response

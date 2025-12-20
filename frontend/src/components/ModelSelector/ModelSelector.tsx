@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import type { Model } from "../../types";
+import { API_URL } from "../../config";
 import styles from "./ModelSelector.module.css";
 
 interface ModelSelectorProps {
@@ -16,7 +17,7 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({ value, onChange }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5001/api/models")
+      .get(`${API_URL}/api/models`)
       .then((res) => {
         setModels(res.data);
         setLoading(false);
