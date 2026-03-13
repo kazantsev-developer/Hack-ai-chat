@@ -1,15 +1,11 @@
 # Хако ИИ (Hacko AI)
-
 AI чат-платформа с поддержкой множественных LLM, голосового ввода/вывода, RAG и автоматической классификации.
 
 ## Технологический стек
-
 **Frontend:** React 19 + TypeScript + Vite + Socket.IO + Web Speech API
-
 **Backend:** Node.js + Express + TypeScript + Socket.IO + OpenAI SDK + Anthropic SDK + SQLite
 
 ## Что умеет
-
 - Потоковый чат с множественными LLM (OpenAI, Anthropic, Groq, OpenRouter, Ollama)
 - Голосовой ввод и автоматическое озвучивание ответов
 - Загрузка и анализ документов (PDF, DOC, DOCX, TXT) через RAG
