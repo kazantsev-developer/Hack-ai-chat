@@ -1,62 +1,69 @@
-# Хако ИИ (Hacko AI)
-AI чат-платформа с поддержкой множественных LLM, голосового ввода/вывода, RAG и автоматической классификации.
+# Hacko AI
 
-## Технологический стек
-**Frontend:** React 19 + TypeScript + Vite + Socket.IO + Web Speech API
-**Backend:** Node.js + Express + TypeScript + Socket.IO + OpenAI SDK + Anthropic SDK + SQLite
+An AI chat platform featuring multi-LLM support, voice interaction, RAG, and automated message classification.
 
-## Что умеет
-- Потоковый чат с множественными LLM (OpenAI, Anthropic, Groq, OpenRouter, Ollama)
-- Голосовой ввод и автоматическое озвучивание ответов
-- Загрузка и анализ документов (PDF, DOC, DOCX, TXT) через RAG
-- Система специализированных агентов (Поддержка, Программист, Ассистент)
-- Автоматическая классификация сообщений и создание тикетов
-- **Telegram бот** — полноценный AI ассистент в Telegram:
-  - Автоматическая регистрация при первом сообщении
-  - Общение с AI через бота
-  - Команды: `/start`, `/help`, `/clear`, `/agent [название]`
-  - Сохранение истории диалога
-- Авторизация через SMS/Email/Telegram
-- Темная/светлая тема, мультиязычность (RU/EN)
+## Tech Stack
 
-## Быстрый старт
+### Frontend
+React 19, TypeScript, Vite, Socket.IO, Web Speech API
 
+### Backend
+Node.js, Express, TypeScript, Socket.IO, OpenAI SDK, Anthropic SDK, SQLite
+
+## Core Features
+
+* **Streaming Multi-LLM Chat:** Seamless interaction with OpenAI, Anthropic, Groq, OpenRouter, and Ollama.
+* **Voice Interaction:** Native voice input and automated speech synthesis for model responses.
+* **Document Analysis (RAG):** Document upload and processing support for PDF, DOC, DOCX, and TXT via Retrieval-Augmented Generation.
+* **Specialized AI Agents:** Dedicated presets for Support, Developer, and Assistant roles.
+* **Automated Classification:** Smart message processing with automated ticket creation.
+* **Telegram Bot Integration:** A fully functional AI assistant within Telegram featuring:
+  * Automatic user registration upon the first message.
+  * Direct chat interaction with the AI.
+  * Command support: /start, /help, /clear, /agent [name].
+  * Persistent chat history synchronization.
+* **Authentication:** Multi-channel login via SMS, Email, and Telegram.
+* **UI/UX:** Native dark/light mode toggle and full multilingual support (RU/EN).
+
+## Quick Start
+
+### Backend Installation
 ```bash
-# Backend
 cd backend
 npm install
 cp env.example .env
 npm run dev
+```
 
-# Frontend
+### Frontend Installation
+```bash
 cd ../frontend
 npm install
 npm run dev
 ```
+Once started, navigate to http://localhost:5173
 
-Откройте http://localhost:5173
+## API Key Configuration
 
-## Настройка API ключей
+Create a `backend/.env` file and provide at least one valid API key:
 
-Создайте `backend/.env` и добавьте хотя бы один ключ:
-
-```bash
+```env
 OPENROUTER_API_KEY=your_key
-# или
+# or
 GROQ_API_KEY=your_key
-# или
+# or
 OPENAI_API_KEY=your_key
 ```
 
-### Telegram бот (опционально)
+## Telegram Bot Setup (Optional)
 
-1. Найдите @BotFather в Telegram
-2. Отправьте `/newbot` и следуйте инструкциям
-3. Скопируйте токен (например: `123456789:ABCdefGHIjklMNOpqrsTUVwxyz`)
-4. Добавьте в `backend/.env`: `TELEGRAM_BOT_TOKEN=ваш_токен`
-5. Перезапустите backend
-6. Найдите вашего бота в Telegram и отправьте `/start`
+1. Contact @BotFather on Telegram.
+2. Send the `/newbot` command and follow the configuration steps.
+3. Copy the generated HTTP API token (e.g., `123456789:ABCdefGHIjklMNOpqrsTUVwxyz`).
+4. Append the token to your `backend/.env` file: `TELEGRAM_BOT_TOKEN=your_token`
+5. Restart the backend service.
+6. Open your bot in Telegram and send the `/start` command.
 
-**Важно:** Бот работает локально через polling, публичный URL не нужен.
+Note: The bot runs locally using long polling mechanism. No public URL or webhook configuration is required.
 
-Полные инструкции: см. `backend/env.example`
+For comprehensive configuration guidelines, please refer to `backend/env.example`.
